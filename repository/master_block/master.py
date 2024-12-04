@@ -1,10 +1,9 @@
 from telegram_block.telegram import TelegramBot
+from database_block.database import Database
 
 class Master:
-    def __init__(self,mode):
+    def __init__(self):
         print("INIT MASTER")
-        self.mode = mode
-        print(self.mode)
         self.token = "7555575054:AAGF6QqrXJaC6Db9PRlyNd7fbeA-RLrKzQs"
         self.init_modules()
         self.start_modules()
@@ -13,6 +12,7 @@ class Master:
 
     def init_modules(self):
         self.telegram = TelegramBot(self)
+        self.database = Database(self)
 
     def start_modules(self) :
         self.telegram.start_bot()
