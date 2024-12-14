@@ -4,9 +4,6 @@ import sqlite3
 class Database:
     def __init__(self):
         print("INIT DATABASE")
-
-        
-        
         self.connection = sqlite3.connect('Database_tg.db', check_same_thread=False)
         self.cursor = self.connection.cursor()
         self.cursor.execute('''
@@ -33,12 +30,13 @@ class Database:
         
     
     def close(self):
-        self.connection.close()
+        if self.connection:
+            self.connection.close()
+            print("Database connection closed.")
 
     def insert_user_from_message(self, message):
         user_id = message.from_user.id
         username = message.from_user.username
         user_message = message.text
         self.insert_user(user_id, username, user_message)
-        self.connection.commit()
         print("Insert successfully")
